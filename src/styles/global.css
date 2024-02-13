@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: "Source Sans 3", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+
+  /* Custom scrollbar for Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgb(136, 146, 176) none;
+  overflow-y: scroll;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+/* Custom scrollbar for Chromium */
+html::-webkit-scrollbar {
+  width: 6px;
+}
+
+html::-webkit-scrollbar-track {
+  background: none;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: rgb(136, 146, 176);
+  border-radius: none;
+}
