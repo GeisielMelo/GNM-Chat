@@ -1,9 +1,9 @@
-const App: React.FC = () => {
-  return (
-    <div>
-      <h1 className="text-red-600">Hello World</h1>
-    </div>
-  )
-}
+import Home from "./pages/Home";
+// import Login from "./pages/Login";
+// import Register from "./pages/Register";
 
-export default App
+const App: React.FC = () => {
+  return <Home />;
+};
+
+export default App;
