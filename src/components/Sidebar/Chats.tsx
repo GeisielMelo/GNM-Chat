@@ -5,23 +5,33 @@ import { database } from '../../config/firebase'
 import Contact from './Contact'
 import { IUser, useChat } from '../../context/ChatContext'
 
-type ChatsProps = {
-  photoURL: string
-  displayName: string
-  text?: string
+type ChatProps = {
+  id: string
+  lastMessage: { text: string }
+  userInfo: { displayName: string; photoURL: string; uid: string }
+  date: { seconds: number; nanoseconds: number }
 }
 
 const Chats: React.FC = () => {
   const { user } = useAuth()
   const { setChatsData } = useChat()
-
-  const [chats, setChats] = useState<ChatsProps>([])
+  const [chats, setChats] = useState<ChatProps[] | null>(null)
 
   useEffect(() => {
     const getChats = () => {
       if (!user) return
       const unsub = onSnapshot(doc(database, 'userChats', user.uid), (doc) => {
-        setChats(doc.data())
+        const data = doc.data()
+        if (!data) return setChats(null)
+
+        const dataToArr = Object.keys(data).map((key) => ({
+          id: key,
+          lastMessage: data[key].lastMessage,
+          userInfo: data[key].userInfo,
+          date: data[key].date,
+        }))
+
+        setChats(dataToArr)
       })
 
       return () => {
@@ -32,23 +42,20 @@ const Chats: React.FC = () => {
     user && getChats()
   }, [user])
 
-  const handleSelect = (u: IUser) => {
-    setChatsData(u)
+  const handleSelect = (userInfo: IUser) => {
+    setChatsData(userInfo)
   }
-
-  console.log(chats)
 
   return (
     <div className='p-2 h-[calc(100%-67px)] overflow-y-scroll'>
-      {Object.entries(chats)
-        ?.sort((a, b) => b[1].date - a[1].date)
-        .map((_, key) => (
+      {chats &&
+        chats.map((chat, key) => (
           <Contact
             key={key}
-            avatar={_[1].userInfo.photoURL}
-            name={_[1].userInfo.displayName}
-            message={_[1].lastMessage?.text}
-            onClick={() => handleSelect(_[1].userInfo)}
+            avatar={chat.userInfo.photoURL}
+            name={chat.userInfo.displayName}
+            message={chat.lastMessage?.text}
+            onClick={() => handleSelect(chat.userInfo)}
           />
         ))}
     </div>
