@@ -2,6 +2,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { FormEvent, useState } from 'react'
 import { updateProfile } from 'firebase/auth'
+import { database } from '../config/firebase'
+import { setDoc, doc } from 'firebase/firestore'
 
 type AuthError = {
   code: string
@@ -37,6 +39,12 @@ const Register: React.FC = () => {
 
       const res = await signUp(data.email, data.passA)
       await updateProfile(res.user, { displayName: data.name })
+      await setDoc(doc(database, 'users', res.user.uid), {
+        uid: res.user.uid,
+        displayName: data.name,
+        email: data.email,
+      })
+      await setDoc(doc(database, 'userChats', res.user.uid), {})
       navigate('/')
     } catch (error) {
       console.log(error)
@@ -87,7 +95,7 @@ const Register: React.FC = () => {
             value={data.passB}
             onChange={(e) => setData({ ...data, passB: e.target.value })}
           />
-          <button className='rounded border border-zinc-400' disabled={loading}>
+          <button className='rounded border border-zinc-400 disabled:cursor-progress' disabled={loading}>
             Sign Up
           </button>
         </form>
