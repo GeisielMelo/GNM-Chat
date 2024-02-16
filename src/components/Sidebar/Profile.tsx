@@ -1,11 +1,23 @@
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/AuthContext'
+
 const Profile: React.FC = () => {
+  const navigate = useNavigate()
+  const { user, authenticated, logout } = useAuth()
+
   return (
     <div className='flex justify-between p-2 mt-auto border border-t-zinc-400'>
       <div className='flex gap-2'>
-        <img className='w-6 h-6 rounded-full object-cover' src='' alt='user image' />
-        <h1>Lorem da Silva</h1>
+        {user?.photoURL ? (
+          <img className='w-6 h-6 rounded-full object-cover' src={user.photoURL} alt='user image' />
+        ) : (
+          <h1 className='capitalize text-center text-white bg-zinc-400 w-6 h-6 rounded-full'>
+            {user && user.displayName ? user.displayName[0] : 'N/A'}
+          </h1>
+        )}
+        <h2 className='capitalize'>{user ? user.displayName : 'offline'}</h2>
       </div>
-      <button>Logout</button>
+      <button onClick={() => (authenticated ? logout() : navigate('/sign-in'))}>Logout</button>
     </div>
   )
 }
