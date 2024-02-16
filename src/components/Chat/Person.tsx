@@ -1,6 +1,6 @@
 type PersonProps = {
-  avatar: string
-  name: string
+  avatar?: string
+  name?: string
 }
 
 const Person: React.FC<PersonProps> = ({ avatar, name }) => {
