@@ -66,8 +66,9 @@ const Search: React.FC = () => {
   }
 
   return (
-    <div className='p-2'>
+    <div className='px-2 py-1 h-[3.75rem]'>
       <div>
+        <h1 className='text-sm mb-1'>Chats</h1>
         <input
           className='w-full pl-2 border border-zinc-400 rounded'
           type='e-mail'

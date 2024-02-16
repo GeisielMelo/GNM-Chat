@@ -47,7 +47,7 @@ const Input: React.FC = () => {
   }
 
   return (
-    <div className='flex gap-2 p-2 h-12'>
+    <div className='flex gap-2 p-2 h-[3.125rem]'>
       <input
         className='w-full border rounded px-2 border-zinc-400'
         type='text'

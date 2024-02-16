@@ -31,7 +31,7 @@ const Chats: React.FC = () => {
           date: data[key].date,
         }))
 
-        setChats(dataToArr)
+        setChats(dataToArr.sort((a, b) => b.date - a.date))
       })
 
       return () => {
@@ -47,7 +47,7 @@ const Chats: React.FC = () => {
   }
 
   return (
-    <div className='p-2 h-[calc(100%-67px)] overflow-y-scroll'>
+    <div className='p-2 h-[calc(100%-110px)] overflow-y-scroll'>
       {chats &&
         chats.map((chat, key) => (
           <Contact

@@ -17,7 +17,7 @@ const Messages: React.FC = () => {
   }, [data.chatId])
 
   return (
-    <div className='flex flex-col p-2 h-[calc(100%-90px)] overflow-y-scroll'>
+    <div className='flex flex-col p-2 gap-2 h-[calc(100%-6.875rem)] overflow-y-scroll'>
       {messages.map((message, key) => (
         <Message key={key} message={message} />
       ))}
