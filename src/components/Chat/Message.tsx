@@ -17,8 +17,8 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   const owner = message.senderId === user?.uid
 
   const handleConvertTimestamp = (timestamp: number) => {
-    const date = new Date(timestamp)
-    const localTime = new Date(date.getTime() - 180 * 60000)
+    const date = new Date(timestamp * 1000)
+    const localTime = new Date(date.getTime())
 
     let hh = localTime.getHours()
     const mm = localTime.getMinutes()
