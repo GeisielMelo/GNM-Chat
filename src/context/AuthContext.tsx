@@ -17,6 +17,7 @@ type AuthContextProps = {
   signIn: (email: string, password: string) => Promise<UserCredential>
   logout: () => Promise<void>
 }
+
 type AuthProviderProps = {
   children: ReactNode
 }
