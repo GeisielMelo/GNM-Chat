@@ -1,9 +1,15 @@
-import Home from "./pages/Home";
-// import Login from "./pages/Login";
-// import Register from "./pages/Register";
+import AppRoutes from './AppRoutes'
+import { AuthProvider } from './context/AuthContext'
+import { ChatProvider } from './context/ChatContext'
 
 const App: React.FC = () => {
-  return <Home />;
-};
+  return (
+    <AuthProvider>
+      <ChatProvider>
+        <AppRoutes />
+      </ChatProvider>
+    </AuthProvider>
+  )
+}
 
-export default App;
+export default App
