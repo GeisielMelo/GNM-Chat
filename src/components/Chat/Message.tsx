@@ -1,4 +1,5 @@
 import { useAuth } from '../../context/AuthContext'
+import { useEffect, useRef } from 'react'
 
 type MessageProps = {
   message: {
@@ -15,6 +16,11 @@ type MessageProps = {
 const Message: React.FC<MessageProps> = ({ message }) => {
   const { user } = useAuth()
   const owner = message.senderId === user?.uid
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [message])
 
   const handleConvertTimestamp = (timestamp: number) => {
     const date = new Date(timestamp * 1000)
@@ -29,8 +35,8 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   }
 
   return (
-    <div className={owner ? 'flex justify-end' : ''}>
-      <div className='flex items-end gap-4 mt-2 p-2 max-w-max rounded bg-green-300'>
+    <div className={owner ? 'flex justify-end' : ''} ref={ref}>
+      <div className='flex items-end gap-4 p-2 max-w-max rounded bg-green-300'>
         <p>{message.text}</p>
         <p className='text-xs max-h-4 whitespace-nowrap'>{handleConvertTimestamp(message.data.seconds)}</p>
       </div>
