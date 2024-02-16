@@ -7,7 +7,7 @@ const Chat: React.FC = () => {
   const { data } = useChat()
 
   return (
-    <div className='w-full bg-red-300'>
+    <div className='w-full'>
       {data.chatId != 'null' && (
         <>
           <Person avatar={data.user.photoURL} name={data.user.displayName} />
