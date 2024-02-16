@@ -1,4 +1,4 @@
-import { Timestamp, arrayUnion, doc, serverTimestamp, updateDoc } from 'firebase/firestore'
+import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { SendHorizontal } from 'lucide-react'
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext'
@@ -12,30 +12,30 @@ const Input: React.FC = () => {
   const { data } = useChat()
 
   const handleSend = async () => {
-    if (!text) return
+    if (text && user && data.user.uid && data.chatId) {
+      await updateDoc(doc(database, 'chats', data.chatId), {
+        messages: arrayUnion({
+          id: uuid(),
+          text,
+          senderId: user.uid,
+          data: Timestamp.now(),
+        }),
+      })
 
-    await updateDoc(doc(database, 'chats', data.chatId), {
-      messages: arrayUnion({
-        id: uuid(),
-        text,
-        senderId: user.uid,
-        data: Timestamp.now(),
-      }),
-    })
+      await updateDoc(doc(database, 'userChats', user.uid), {
+        [data.chatId + '.lastMessage']: {
+          text,
+        },
+        [data.chatId + '.date']: Timestamp.now(),
+      })
 
-    await updateDoc(doc(database, 'userChats', user.uid), {
-      [data.chatId + '.lastMessage']: {
-        text,
-      },
-      [data.chatId + '.date']: serverTimestamp(),
-    })
-
-    await updateDoc(doc(database, 'userChats', data.user.uid), {
-      [data.chatId + '.lastMessage']: {
-        text,
-      },
-      [data.chatId + '.date']: serverTimestamp(),
-    })
+      await updateDoc(doc(database, 'userChats', data.user.uid), {
+        [data.chatId + '.lastMessage']: {
+          text,
+        },
+        [data.chatId + '.date']: Timestamp.now(),
+      })
+    }
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
