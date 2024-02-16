@@ -3,7 +3,7 @@ import { useAuth } from '../../context/AuthContext'
 import { doc, onSnapshot } from 'firebase/firestore'
 import { database } from '../../config/firebase'
 import Contact from './Contact'
-import { useChat } from '../../context/ChatContext'
+import { IUser, useChat } from '../../context/ChatContext'
 
 type ChatsProps = {
   photoURL: string
@@ -13,7 +13,7 @@ type ChatsProps = {
 
 const Chats: React.FC = () => {
   const { user } = useAuth()
-  const { dispatch } = useChat()
+  const { setChatsData } = useChat()
 
   const [chats, setChats] = useState<ChatsProps>([])
 
@@ -32,9 +32,11 @@ const Chats: React.FC = () => {
     user && getChats()
   }, [user])
 
-  const handleSelect = (u) => {
-    dispatch({ type: 'CHANGE_USER', payload: u })
+  const handleSelect = (u: IUser) => {
+    setChatsData(u)
   }
+
+  console.log(chats)
 
   return (
     <div className='p-2 h-[calc(100%-67px)] overflow-y-scroll'>

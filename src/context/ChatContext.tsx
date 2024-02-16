@@ -1,24 +1,20 @@
-import { ReactNode, createContext, useContext, useReducer } from 'react'
+import { ReactNode, createContext, useContext, useState } from 'react'
 import { useAuth } from './AuthContext'
 
-type User = {
+export type IUser = {
+  displayName?: string
+  photoURL?: string
   uid?: string
-  // Defina outros campos do usuário, se necessário
 }
 
-type ChatData = {
+export type IChatData = {
   chatId: string
-  user: User
-}
-
-type Action = {
-  type: string
-  payload?: any
+  user: IUser
 }
 
 type ChatContextProps = {
-  data: ChatData
-  dispatch: React.Dispatch<Action>
+  data: IChatData
+  setChatsData: (userInfo: IUser) => void
 }
 
 type ChatProviderProps = {
@@ -36,33 +32,24 @@ export const useChat = (): ChatContextProps => {
   return context
 }
 
-const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
+export const ChatProvider: React.FC<ChatProviderProps> = ({ children }) => {
   const { user } = useAuth()
-
-  const INITIAL_STATE: ChatData = {
+  const [data, setData] = useState<IChatData>({
     chatId: 'null',
     user: {},
+  })
+
+  const setChatsData = (userInfo: IUser) => {
+    if (!user) throw new Error('User not authenticated.')
+    if (!userInfo.uid) throw new Error('User not found.')
+
+    setData({
+      user: userInfo,
+      chatId: user.uid > userInfo.uid ? user.uid + userInfo.uid : userInfo.uid + user.uid,
+    })
   }
 
-  const chatReducer = (state: ChatData, action: Action): ChatData => {
-    if (!user) throw new Error('User not authenticated')
-
-    switch (action.type) {
-      case 'CHANGE_USER':
-        return {
-          user: action.payload,
-          chatId: user.uid > action.payload.uid ? user.uid + action.payload.uid : action.payload.uid + user.uid,
-        }
-      default:
-        return state
-    }
-  }
-
-  const [state, dispatch] = useReducer(chatReducer, INITIAL_STATE)
-
-  const value: ChatContextProps = { data: state, dispatch }
+  const value: ChatContextProps = { data, setChatsData }
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>
 }
-
-export default ChatProvider
