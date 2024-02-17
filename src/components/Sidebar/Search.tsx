@@ -17,7 +17,7 @@ const Search: React.FC = () => {
       const querySnapshot = await getDocs(q)
       setSearched(querySnapshot.docs[0].data() as User)
     } catch (error) {
-      setErr(true)
+      handleSetErrTimer()
     }
   }
 
@@ -30,6 +30,14 @@ const Search: React.FC = () => {
   const handleReset = () => {
     setUserEmail('')
     setSearched(undefined)
+    setErr(false)
+  }
+
+  const handleSetErrTimer = () => {
+    setErr(true)
+    setTimeout(() => {
+      setErr(false)
+    }, 2000)
   }
 
   const handleSelect = async () => {
@@ -66,24 +74,24 @@ const Search: React.FC = () => {
   }
 
   return (
-    <div className='px-2 py-1 h-[3.75rem]'>
-      <div>
-        <h1 className='text-sm mb-1'>Chats</h1>
+    <>
+      <div className='flex justify-center items-center px-2 h-[3.75rem] rounded-tl-lg shadow  bg-[#ffffff]'>
         <input
-          className='w-full pl-2 border border-zinc-400 rounded'
+          className={`text-md w-full py-1 pl-4 outline-none rounded-full shadow ${err ? 'shadow-red-500' : 'shadow-black/20'}`}
           type='e-mail'
           autoComplete='off'
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={'Search or start a new chat.'}
+          placeholder={'Find a friend!'}
         />
       </div>
 
-      {err && <span>User not found!</span>}
-
       {searched && (
-        <div className='flex justify-between p-2 mt-2 border border-zinc-400' onClick={handleSelect}>
+        <div
+          className='flex justify-between mx-1 p-2 shadow cursor-pointer rounded active:bg-[#EFCFFF] transition-all'
+          onClick={handleSelect}
+        >
           <div className='flex gap-2 capitalize'>
             {searched.photoURL ? (
               <img className='w-6 h-6 rounded-full object-cover' src={searched.photoURL} alt='user image' />
@@ -96,12 +104,12 @@ const Search: React.FC = () => {
               <span>{searched.displayName ? searched.displayName : 'N/A'}</span>
             </div>
           </div>
-          <button className='' onClick={() => handleReset()}>
-            <X />
+          <button className='text-red-600 text-sm active:text-red-800 transition-all' onClick={() => handleReset()}>
+            <X size={16} />
           </button>
         </div>
       )}
-    </div>
+    </>
   )
 }
 export default Search
