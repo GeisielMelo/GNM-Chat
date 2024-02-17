@@ -47,7 +47,7 @@ const Chats: React.FC = () => {
   }
 
   return (
-    <div className='p-2 h-[calc(100%-110px)] overflow-y-scroll'>
+    <div className='flex flex-col gap-1 px-1 h-[calc(100%-110px)] overflow-y-scroll no-scrollbar'>
       {chats &&
         chats.map((chat, key) => (
           <Contact
