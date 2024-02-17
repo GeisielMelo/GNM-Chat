@@ -7,7 +7,7 @@ type ContactProps = {
 
 const Contact: React.FC<ContactProps> = ({ avatar, name, message, onClick }) => {
   return (
-    <div className='flex items-center gap-2 p-2 rounded active:bg-zinc-400' onClick={onClick}>
+    <div className='flex items-center gap-2 p-2 rounded shadow bg-[#ffffff] active:bg-[#EFCFFF] transition-all' onClick={onClick}>
       {avatar != 'N/A' ? (
         <img className='w-9 h-9 rounded-full object-cover' src={avatar} alt='user image' />
       ) : (
