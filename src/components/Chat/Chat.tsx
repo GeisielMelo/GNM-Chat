@@ -7,7 +7,7 @@ const Chat: React.FC = () => {
   const { data } = useChat()
 
   return (
-    <div className='w-full'>
+    <div className='flex flex-col gap-1 w-full rounded-r-lg bg-[#efefef]'>
       {data.chatId != 'null' && (
         <>
           <Person avatar={data.user.photoURL} name={data.user.displayName} />
