@@ -6,7 +6,7 @@ const Profile: React.FC = () => {
   const { user, authenticated, logout } = useAuth()
 
   return (
-    <div className='flex justify-between items-center p-2 h-[3.125rem] border border-t-zinc-400'>
+    <div className='flex justify-between items-center p-2 h-[3.125rem]'>
       <div className='flex gap-2'>
         {user?.photoURL ? (
           <img className='w-6 h-6 rounded-full object-cover' src={user.photoURL} alt='user image' />
