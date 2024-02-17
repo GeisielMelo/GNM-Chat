@@ -35,6 +35,7 @@ const Input: React.FC = () => {
         },
         [data.chatId + '.date']: Timestamp.now(),
       })
+      setText('')
     }
   }
 
@@ -42,16 +43,15 @@ const Input: React.FC = () => {
     if (e.key === 'Enter') {
       e.preventDefault()
       handleSend()
-      setText('')
     }
   }
 
   return (
     <div className='flex gap-2 p-2 h-[3.125rem]'>
       <input
-        className='w-full border rounded px-2 border-zinc-400'
+        className='w-full rounded px-2 shadow outline-none shadow-black/30'
         type='text'
-        placeholder='text'
+        placeholder='Type a message'
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => handleKeyDown(e)}
