@@ -7,7 +7,10 @@ type ContactProps = {
 
 const Contact: React.FC<ContactProps> = ({ avatar, name, message, onClick }) => {
   return (
-    <div className='flex items-center gap-2 p-2 rounded shadow bg-[#ffffff] active:bg-[#EFCFFF] transition-all' onClick={onClick}>
+    <div
+      className='flex justify-center md:justify-normal items-center gap-2 p-2 rounded shadow bg-[#ffffff] active:bg-[#EFCFFF] transition-all'
+      onClick={onClick}
+    >
       {avatar != 'N/A' ? (
         <img className='w-9 h-9 rounded-full object-cover' src={avatar} alt='user image' />
       ) : (
@@ -16,8 +19,8 @@ const Contact: React.FC<ContactProps> = ({ avatar, name, message, onClick }) => 
         </h1>
       )}
 
-      <div>
-        <h1 className='text-sm capitalize'>{name}</h1>
+      <div className='hidden md:block'>
+        <h1 className='text-sm capitalize text-nowrap truncate'>{name}</h1>
         {message && <p className='text-xs'>{message}</p>}
       </div>
     </div>

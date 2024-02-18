@@ -83,13 +83,13 @@ const Search: React.FC = () => {
           value={userEmail}
           onChange={(e) => setUserEmail(e.target.value)}
           onKeyDown={handleKeyDown}
-          placeholder={'Find a friend!'}
+          placeholder={'Search'}
         />
       </div>
 
       {searched && (
         <div
-          className='flex justify-between mx-1 p-2 shadow cursor-pointer rounded active:bg-[#EFCFFF] transition-all'
+          className='flex justify-between truncate mx-1 p-2 shadow cursor-pointer rounded active:bg-[#EFCFFF] transition-all'
           onClick={handleSelect}
         >
           <div className='flex gap-2 capitalize'>
@@ -100,7 +100,7 @@ const Search: React.FC = () => {
                 {searched.displayName ? searched.displayName[0] : 'N/A'}
               </h1>
             )}
-            <div className='userChatInfo'>
+            <div className='text-nowrap'>
               <span>{searched.displayName ? searched.displayName : 'N/A'}</span>
             </div>
           </div>
@@ -112,4 +112,5 @@ const Search: React.FC = () => {
     </>
   )
 }
+
 export default Search
