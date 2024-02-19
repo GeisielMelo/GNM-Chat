@@ -3,8 +3,8 @@ import Sidebar from '../components/Sidebar/Sidebar'
 
 const Home: React.FC = () => {
   return (
-    <section className='flex justify-center items-center h-[100dvh] p-4 bg-gradient-to-t from-[#6F5DCE] via-[#B793E5] to-[#EFCFFF]'>
-      <div className='flex w-full h-full gap-[2px] rounded-lg shadow shadow-black/60 bg-[#efefef]'>
+    <section className='flex justify-center items-center h-[100dvh] md:p-2 bg-gradient-to-tl from-[#49A348] via-[#D9FDD3] to-[#F4FBF3]'>
+      <div className='flex w-full h-full gap-[2px] md:rounded-lg shadow shadow-black/60 bg-[#efefef]'>
         <Sidebar />
         <Chat />
       </div>
