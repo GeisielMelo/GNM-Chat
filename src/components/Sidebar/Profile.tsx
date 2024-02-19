@@ -18,7 +18,11 @@ const Profile: React.FC = () => {
         )}
         {/* <h2 className='capitalize'>{user ? user.displayName : 'offline'}</h2> */}
       </div>
-      <button onClick={() => (authenticated ? logout() : navigate('/sign-in'))}>
+      <button
+        className='text-zinc-400'
+        title='Logout'
+        onClick={() => (authenticated ? logout() : navigate('/sign-in'))}
+      >
         <LogOut size={22} />
       </button>
     </div>
