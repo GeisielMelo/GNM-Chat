@@ -7,11 +7,14 @@ import { database } from '../../config/firebase'
 import { v4 as uuid } from 'uuid'
 
 const Input: React.FC = () => {
-  const [text, setText] = useState('')
+  const [inputText, setInputText] = useState('')
   const { user } = useAuth()
   const { data } = useChat()
 
   const handleSend = async () => {
+    const text = inputText
+    setInputText('')
+
     if (text && user && data.user.uid && data.chatId) {
       await updateDoc(doc(database, 'chats', data.chatId), {
         messages: arrayUnion({
@@ -35,7 +38,6 @@ const Input: React.FC = () => {
         },
         [data.chatId + '.date']: Timestamp.now(),
       })
-      setText('')
     }
   }
 
@@ -52,8 +54,8 @@ const Input: React.FC = () => {
         className='w-full rounded px-2 shadow outline-none shadow-black/30'
         type='text'
         placeholder='Type a message'
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
         onKeyDown={(e) => handleKeyDown(e)}
       />
       <button className='p-1' onClick={handleSend}>
