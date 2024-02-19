@@ -19,16 +19,16 @@ const AppRoutes: React.FC = () => {
   }
 
   const Public: React.FC<RoutesProps> = ({ children }) => {
-    return loading ? <span>Loading...</span> : authenticated ? <Navigate to='/' /> : children
+    return loading ? <span>Loading...</span> : authenticated ? <Navigate to='/home' /> : children
   }
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={'/'} element={<Main />} />
-        <Route path={'home'} element={<Private><Home /></Private>}/>
+        <Route path={'/'} element={<Public><Main /></Public>} />
         <Route path={'sign-in'} element={<Public><Login /></Public>}/>
         <Route path={'sign-up'} element={<Public><Register /></Public>}/>
+        <Route path={'home'} element={<Private><Home /></Private>}/>
       </Routes>
     </BrowserRouter>
   )
