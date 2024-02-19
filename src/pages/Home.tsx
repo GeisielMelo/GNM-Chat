@@ -1,5 +1,5 @@
-import Chat from '../components/Chat/Chat'
-import Sidebar from '../components/Sidebar/Sidebar'
+import Chat from '../components/Chat'
+import Sidebar from '../components/Sidebar'
 
 const Home: React.FC = () => {
   return (

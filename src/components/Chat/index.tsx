@@ -4,7 +4,7 @@ import Messages from './Messages'
 import Person from './Person'
 import Welcoming from './Welcoming'
 
-const Chat: React.FC = () => {
+const Index: React.FC = () => {
   const { data } = useChat()
 
   return data.chatId == 'null' ? (
@@ -20,4 +20,4 @@ const Chat: React.FC = () => {
   )
 }
 
-export default Chat
+export default Index
