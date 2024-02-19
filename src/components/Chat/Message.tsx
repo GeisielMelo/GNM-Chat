@@ -37,10 +37,10 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   return (
     <div className={owner ? 'flex justify-end' : ''} ref={ref}>
       <div
-        className={`flex flex-col items-end px-2 py-1 w-max max-w-[60%] rounded shadow ${owner ? 'bg-green-300' : 'bg-[#ffffff]'}`}
+        className={`flex items-end flex-wrap gap-4 px-2 py-1 w-max max-w-[60%] rounded shadow ${owner ? 'bg-[#d9fdd3]' : 'bg-[#ffffff'}`}
       >
         <p>{message.text}</p>
-        <p className='text-xs/[12px] text-black/60 max-h-4 whitespace-nowrap'>
+        <p className='text-[10px] text-black/60 max-h-4 whitespace-nowrap text-right'>
           {handleConvertTimestamp(message.data.seconds)}
         </p>
       </div>
