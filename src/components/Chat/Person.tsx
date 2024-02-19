@@ -5,7 +5,7 @@ type PersonProps = {
 
 const Person: React.FC<PersonProps> = ({ avatar, name }) => {
   return (
-    <div className='flex items-center p-2 gap-2 h-[3.75rem] capitalize shadow rounded-tr-lg bg-[#ffffff]'>
+    <div className='flex items-center p-2 gap-2 h-[3.75rem] capitalize shadow md:rounded-tr-lg bg-[#ffffff]'>
       {avatar != 'N/A' ? (
         <img className='w-9 h-9 rounded-full object-cover' src={avatar} alt='user image' />
       ) : (

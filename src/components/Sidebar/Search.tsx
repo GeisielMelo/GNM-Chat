@@ -75,9 +75,9 @@ const Search: React.FC = () => {
 
   return (
     <>
-      <div className='flex justify-center items-center px-2 h-[3.75rem] rounded-tl-lg shadow  bg-[#ffffff]'>
+      <div className='flex justify-center items-center px-2 h-[3.75rem] md:rounded-tl-lg shadow  bg-[#ffffff]'>
         <input
-          className={`text-md w-full py-1 pl-4 outline-none rounded-full shadow ${err ? 'shadow-red-500' : 'shadow-black/20'}`}
+          className={`text-md w-full py-1 px-2 md:pl-4 outline-none rounded-full shadow ${err ? 'shadow-red-500' : 'shadow-black/20'}`}
           type='e-mail'
           autoComplete='off'
           value={userEmail}
