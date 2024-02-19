@@ -5,6 +5,7 @@ import { updateProfile } from 'firebase/auth'
 import { database } from '../config/firebase'
 import { setDoc, doc } from 'firebase/firestore'
 import logo from '../assets/logo.svg'
+import { Spinner } from '../components/Spinner'
 
 type AuthError = {
   code: string
@@ -70,6 +71,7 @@ const Register: React.FC = () => {
             placeholder='Name'
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}
+            disabled={loading}
           />
           <input
             className='px-2 py-1 w-full border border-slate-400 rounded-lg'
@@ -78,6 +80,7 @@ const Register: React.FC = () => {
             placeholder='E-mail'
             value={data.email}
             onChange={(e) => setData({ ...data, email: e.target.value })}
+            disabled={loading}
           />
           <input
             className='px-2 py-1 w-full border border-slate-400 rounded-lg'
@@ -86,6 +89,7 @@ const Register: React.FC = () => {
             placeholder='Password'
             value={data.passA}
             onChange={(e) => setData({ ...data, passA: e.target.value })}
+            disabled={loading}
           />
           <input
             className='px-2 py-1 w-full border border-slate-400 rounded-lg'
@@ -94,12 +98,13 @@ const Register: React.FC = () => {
             placeholder='Password'
             value={data.passB}
             onChange={(e) => setData({ ...data, passB: e.target.value })}
+            disabled={loading}
           />
           <button
-            className='p-1 rounded border shadow shadow-[#49A348] bg-[#D9FDD3] hover:bg-[#D9FDD3] text-[#49A348] transition-all'
+            className='flex justify-center p-1 rounded border shadow shadow-[#49A348] bg-[#D9FDD3] hover:bg-[#D9FDD3] text-[#49A348] transition-all disabled:cursor-progress'
             disabled={loading}
           >
-            Sign Up
+            {loading ? <Spinner /> : 'Register'}
           </button>
         </form>
         <p className='text-sm'>

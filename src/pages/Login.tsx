@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import logo from '../assets/logo.svg'
+import { Spinner } from '../components/Spinner'
 
 type AuthError = {
   code: string
@@ -41,28 +42,30 @@ const Login: React.FC = () => {
         {err && <p className='text-red-500'>{err}</p>}
         <form className='flex flex-col w-full gap-2' onSubmit={handleSubmit}>
           <input
-            className='px-2 py-1 w-full border border-zinc-400 rounded-md'
+            className='px-2 py-1 w-full border border-zinc-400 rounded-md disabled:cursor-not-allowed'
             type='email'
             name='email'
             autoComplete='on'
             placeholder='E-mail'
             value={data.email}
             onChange={(e) => setData({ ...data, email: e.target.value })}
+            disabled={loading}
           />
           <input
-            className='px-2 py-1 w-full border border-zinc-400 rounded-md'
+            className='px-2 py-1 w-full border border-zinc-400 rounded-md disabled:cursor-not-allowed'
             type='password'
             name='password'
             autoComplete='on'
             placeholder='Password'
             value={data.password}
             onChange={(e) => setData({ ...data, password: e.target.value })}
+            disabled={loading}
           />
           <button
-            className='p-1 rounded border shadow shadow-[#49A348] bg-[#D9FDD3] hover:bg-[#D9FDD3] text-[#49A348] transition-all'
+            className='flex justify-center p-1 rounded border shadow shadow-[#49A348] bg-[#D9FDD3] hover:bg-[#D9FDD3] text-[#49A348] transition-all disabled:cursor-progress'
             disabled={loading}
           >
-            Sign In
+            {loading ? <Spinner /> : 'Login'}
           </button>
         </form>
         <p className='text-sm'>
