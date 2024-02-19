@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { LogOut } from 'lucide-react'
 
 const Profile: React.FC = () => {
   const navigate = useNavigate()
@@ -17,7 +18,9 @@ const Profile: React.FC = () => {
         )}
         {/* <h2 className='capitalize'>{user ? user.displayName : 'offline'}</h2> */}
       </div>
-      <button onClick={() => (authenticated ? logout() : navigate('/sign-in'))}>Logout</button>
+      <button onClick={() => (authenticated ? logout() : navigate('/sign-in'))}>
+        <LogOut size={22} />
+      </button>
     </div>
   )
 }

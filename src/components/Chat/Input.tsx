@@ -57,7 +57,7 @@ const Input: React.FC = () => {
         onKeyDown={(e) => handleKeyDown(e)}
       />
       <button className='p-1' onClick={handleSend}>
-        <SendHorizontal />
+        <SendHorizontal size={22} />
       </button>
     </div>
   )
