@@ -13,6 +13,7 @@ const Search: React.FC = () => {
 
   const handleSearch = async () => {
     const q = query(collection(database, 'users'), where('email', '==', userEmail))
+
     try {
       const querySnapshot = await getDocs(q)
       setSearched(querySnapshot.docs[0].data() as User)
@@ -100,7 +101,7 @@ const Search: React.FC = () => {
                 {searched.displayName ? searched.displayName[0] : 'N/A'}
               </h1>
             )}
-            <div className='text-nowrap'>
+            <div className='text-nowrap hidden md:block'>
               <span>{searched.displayName ? searched.displayName : 'N/A'}</span>
             </div>
           </div>
