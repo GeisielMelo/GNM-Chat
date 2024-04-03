@@ -106,7 +106,7 @@ const Login: React.FC = () => {
             className='flex justify-center p-1 rounded border shadow shadow-[#49A348] bg-[#D9FDD3] hover:bg-[#D9FDD3] text-[#49A348] transition-all disabled:cursor-progress'
             disabled={loading}
           >
-            {loading ? <Spinner /> : 'Register'}
+            {loading ? <Spinner /> : 'Login'}
           </button>
         </form>
         <p className='text-sm'>
